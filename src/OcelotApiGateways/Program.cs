@@ -60,6 +60,7 @@ namespace OcelotApiGateways
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
                 var env = hostingContext.HostingEnvironment;
+                Console.WriteLine($"{env}");
                 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile(Path.Combine("configuration", $"hostsettings.json"), optional: true, reloadOnChange: true)

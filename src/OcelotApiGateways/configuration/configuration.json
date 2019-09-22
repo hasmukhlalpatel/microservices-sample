@@ -1,4 +1,18 @@
 {
-  "ReRoutes": [],
-  "GlobalConfiguration": {}
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/values/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 10510
+        }
+      ],
+      "UpstreamPathTemplate": "/catalogs/{everything}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:10500"
+  }
 }

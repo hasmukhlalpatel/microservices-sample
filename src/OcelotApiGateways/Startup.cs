@@ -11,6 +11,7 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Eureka;
 using Ocelot.Cache.CacheManager;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OcelotApiGateways
 {
@@ -24,20 +25,23 @@ namespace OcelotApiGateways
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOcelot()
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddOcelot(_cfg)
                 //.AddEureka()
-                .AddCacheManager(x => x.WithDictionaryHandle()); ;
+                //.AddCacheManager(x => x.WithDictionaryHandle());
+                 ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseOcelot();
+            app.UseMvc();
+            await app.UseOcelot();
 
             //app.Run(async (context) =>
             //{
